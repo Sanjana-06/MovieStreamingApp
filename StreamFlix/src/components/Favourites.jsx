@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Favourites() {
+function Favourites({watchlist}) {
   return (
     <>
       <div className='flex justify-center flex-wrap'>
@@ -21,23 +21,21 @@ function Favourites() {
               </tr>
           </thead>
           <tbody>
-              <tr className='border-b-2'>
-                  <td className='flex items-center px-6 py-4'>
-                    <div>
-
-                    </div>
-                  </td>
-                  <td>
-
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td className='text-red-800'>Delete</td>
-              </tr>
+              {watchlist.map((movieObj)=>{
+                return<tr key={movieObj.id} className='border-b-2'>
+                        <td className='flex items-center px-6 py-4'>
+                          <div className='flex items-center'>
+                            <img className= 'h-[6rem] w-[10rem] object-cover' src={`https://image.tmdb.org/t//p/original/${movieObj.backdrop_path}`}/>
+                            <div className='ml-7'>{movieObj.title}</div>
+                          </div>
+                        </td>
+                        <td>{movieObj.vote_average}</td>
+                        <td>{movieObj.popularity}</td>
+                        <td>Action</td>
+                        <td className='text-red-800'>Delete</td>
+                      </tr>
+              })}
+              
           </tbody>
         </table>
       </div>

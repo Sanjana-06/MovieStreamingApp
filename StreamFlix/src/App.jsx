@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Banner from "./components/Banner";
 import Favourites from "./components/Favourites";
@@ -13,6 +13,7 @@ function App() {
 
   let handlewatchlist=(movieObj)=>{
     let newWatchList=[...watchlist,movieObj]
+    localStorage.setItem('moviesApp',JSON.stringify(newWatchList))
     setWatchList(newWatchList)
     console.log(newWatchList)
   }
@@ -23,6 +24,15 @@ function App() {
     })
     setWatchList(filteredwatchlist)
   }
+
+  useEffect(()=>{
+    let moviesfromloacalstorage=localStorage.getItem('moviesApp')
+    if(!moviesfromloacalstorage){
+      return
+    }
+    setWatchList(JSON.parse(moviesfromloacalstorage))
+  })
+
   return (
 
     <>
@@ -38,7 +48,7 @@ function App() {
               </>
             }
           ></Route>
-          <Route path="/watchlist" element={<Favourites />}></Route>
+          <Route path="/watchlist" element={<Favourites watchlist={watchlist}/>}></Route>
         </Routes>
       </BrowserRouter>
     </>
