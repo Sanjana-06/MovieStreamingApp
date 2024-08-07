@@ -1,10 +1,39 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-function Favourites({watchlist}) {
+function Favourites({watchlist, setWatchList}) {
   const[search,setSearch]=useState('')
   let handlesearch=(e)=>{
     setSearch(e.target.value)
   }
+
+  let sortIncreasing=()=>{
+    let sortedI=watchlist.sort((movieA,movieB)=>{
+      return movieA.vote_average-movieB.vote_average
+    })
+    setWatchList([...sortedI])
+  }
+  let sortDecreasing=()=>{
+    let sortedD=watchlist.sort((movieA,movieB)=>{
+      return movieB.vote_average-movieA.vote_average
+    })
+    setWatchList([...sortedD])
+  }
+
+  let sortIncreasingP=()=>{
+    let sortedI=watchlist.sort((movieA,movieB)=>{
+      return movieA.vote_average-movieB.vote_average
+    })
+    setWatchList([...sortedI])
+  }
+
+  let sortDecreasingP=()=>{
+    let sortedD=watchlist.sort((movieA,movieB)=>{
+      return movieB.popularity-movieA.popularity
+    })
+    setWatchList([...sortedD])
+  }
+
+
   return (
     <>
       <div className='flex justify-center flex-wrap'>
@@ -26,8 +55,28 @@ function Favourites({watchlist}) {
           <thead className='border-b-2'>
             <tr>
                 <th>Name</th>
-                <th>Ratings</th>
-                <th>Popularity</th>
+                <th>
+                <div className='flex items-center justify-center'>
+                  <div className='p-2 cursor-pointer' onClick={() => sortIncreasing('vote_average')}>
+                    <i className="fa-solid fa-arrow-up"></i>
+                  </div>
+                  <div className='p-2'>Ratings</div>
+                  <div className='p-2 cursor-pointer' onClick={() => sortDecreasing('vote_average')}>
+                    <i className="fa-solid fa-arrow-down"></i>
+                  </div>
+                </div>
+              </th>
+              <th>
+                <div className='flex items-center justify-center'>
+                  <div className='p-2 cursor-pointer' onClick={() => sortIncreasingP('popularity')}>
+                    <i className="fa-solid fa-arrow-up"></i>
+                  </div>
+                  <div className='p-2'>Popularity</div>
+                  <div className='p-2 cursor-pointer' onClick={() => sortDecreasingP('popularity')}>
+                    <i className="fa-solid fa-arrow-down"></i>
+                  </div>
+                </div>
+              </th>
                 <th>Genre</th>
               </tr>
           </thead>

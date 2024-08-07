@@ -31,7 +31,7 @@ function App() {
       return
     }
     setWatchList(JSON.parse(moviesfromloacalstorage))
-  })
+  },[])
 
   return (
 
@@ -48,7 +48,7 @@ function App() {
               </>
             }
           ></Route>
-          <Route path="/watchlist" element={<Favourites watchlist={watchlist}/>}></Route>
+          <Route path="/watchlist" element={<Favourites watchlist={watchlist} setWatchList={setWatchList}/>}></Route>
         </Routes>
       </BrowserRouter>
     </>
