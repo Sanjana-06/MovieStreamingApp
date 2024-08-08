@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
+import genreIds from '../utility/genre'
+
+
 function Favourites({watchlist, setWatchList}) {
   const[search,setSearch]=useState('')
   let handlesearch=(e)=>{
@@ -93,7 +96,7 @@ function Favourites({watchlist, setWatchList}) {
                         </td>
                         <td>{movieObj.vote_average}</td>
                         <td>{movieObj.popularity}</td>
-                        <td>Action</td>
+                        <td>{genreIds[movieObj.genre_ids[0]]}</td>
                         <td className='text-red-800'>Delete</td>
                       </tr>
               })}
