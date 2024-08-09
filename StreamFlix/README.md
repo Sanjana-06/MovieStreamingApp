@@ -26,7 +26,7 @@ Make sure you have `node` and `npm` installed on your machine.
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/movie-streaming-app.git
+git clone https://github.com/Sanjana-06/MovieStreamingApp
 cd movie-streaming-app
 ```
 ### Install Dependencies
