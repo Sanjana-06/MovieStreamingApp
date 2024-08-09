@@ -49,7 +49,7 @@ npm start
 This will start the development server, and you can view the app in your browser at http://localhost:5173.
 
 ### Acknowledgements
-**TMDB API:** For providing movie data.
-**React:** For the front-end framework.
-**Tailwind CSS:** For styling.
-**Netlify:** For deployment.
+**TMDB API:** For providing movie data.  
+**React:** For the front-end framework.  
+**Tailwind CSS:** For styling.  
+**Netlify:** For deployment.  
