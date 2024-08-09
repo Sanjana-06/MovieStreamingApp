@@ -3,10 +3,18 @@ import React, { useEffect, useState } from 'react'
 import genreIds from '../utility/genre'
 
 
-function Favourites({watchlist, setWatchList}) {
-  const[search,setSearch]=useState('')
+
+function Favourites({watchlist, setWatchList,handleremovewatchlist}) {
+  const[search,setSearch]=useState("")
+  const[genreList,setgenreList]=useState(['All Genres'])
+  const[currgenre,setcurrgenre]=useState('All Genres')
+
   let handlesearch=(e)=>{
     setSearch(e.target.value)
+  }
+
+  let handleFilter=(genre)=>{
+    setcurrgenre(genre)
   }
 
   let sortIncreasing=()=>{
@@ -36,11 +44,20 @@ function Favourites({watchlist, setWatchList}) {
     setWatchList([...sortedD])
   }
 
+  useEffect(()=>{
+    let temp=watchlist.map((movieObj)=>{
+      return genreIds[movieObj.genre_ids[0]]
+    })
+    temp=new Set(temp)
+    setgenreList(['All Genres',...temp])
+  },[watchlist])
 
   return (
     <>
       <div className='flex justify-center flex-wrap'>
-          <div className=' items-center bg-blue-400 flex justify-center h-[3rem] w-[9rem] rounded-xl text-white font-bold mx-4'>Action</div>
+      {genreList.map((genre)=>{
+          return <div onClick={()=>handleFilter(genre)}  className={currgenre==genre? 'cursor-pointer items-center bg-blue-400 flex justify-center h-[3rem] w-[9rem] rounded-xl text-white font-bold mx-4':'cursor-pointer flex justify-center items-center h-[3rem] w-[9rem] bg-gray-400 rounded-xl text-white font-bold mx-4 '}>{genre}</div>
+      })}
       </div>
 
       <div className='flex justify-center my-4'>
@@ -85,6 +102,12 @@ function Favourites({watchlist, setWatchList}) {
           </thead>
           <tbody>
               {watchlist.filter((movieObj)=>{
+                if(currgenre=='All Genres'){
+                  return true;
+                }else{
+                  return genreIds[movieObj.genre_ids[0]]==currgenre;
+                }
+              }).filter((movieObj)=>{
                 return movieObj.title.toLowerCase().includes(search.toLocaleLowerCase())
               }).map((movieObj)=>{
                 return<tr key={movieObj.id} className='border-b-2'>
@@ -97,7 +120,7 @@ function Favourites({watchlist, setWatchList}) {
                         <td>{movieObj.vote_average}</td>
                         <td>{movieObj.popularity}</td>
                         <td>{genreIds[movieObj.genre_ids[0]]}</td>
-                        <td className='text-red-800'>Delete</td>
+                        <td onClick={()=>handleremovewatchlist(movieObj)} className='cursor-pointer text-red-800'>Delete</td>
                       </tr>
               })}
               
