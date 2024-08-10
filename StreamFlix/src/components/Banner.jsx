@@ -3,15 +3,15 @@ import React from 'react';
 function Banner({ imageUrl, title }) {
   return (
     <div
-      className='h-[20vh] md:h-[80vh] bg-cover bg-center flex items-end'
+      className='h-[20vh] md:h-[80vh] bg-cover bg-center flex items-end overflow-hidden'
       style={{ 
         backgroundImage: `url(${imageUrl})`, 
-        backgroundSize: 'cover', // Ensure the image covers the container
-        backgroundPosition: 'center', // Center the image
-        backgroundRepeat: 'no-repeat' // Prevent repeating the image
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
+        backgroundRepeat: 'no-repeat' 
       }}
     >
-      <div className='text-white text-xl text-center w-full bg-blue-900/60 p-1'>
+      <div className='text-white font-bold text-xl text-center w-full bg-black bg-opacity-50 p-2'>
         {title}
       </div>
     </div>

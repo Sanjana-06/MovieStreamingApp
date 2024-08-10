@@ -23,8 +23,8 @@ function Movies({handlewatchlist,handleremovewatchlist,watchlist}) {
     },[pageNo])
   })
   return (
-    <div className='p-5'>
-      <div className='m-5 text-2xl font-bold text-center'>Trending Movies</div>
+    <div className='p-3 bg-black'>
+      <div className='m-5 text-2xl font-bold text-center text-white bg-red-600'>Trending Movies</div>
       <div className='flex flex-row flex-wrap justify-around gap-5'>
         {movies.map((movieObj)=>{
           return <MovieCard key={movieObj.id} movieObj={movieObj} poster_path={movieObj.poster_path} name={movieObj.original_title} handlewatchlist={handlewatchlist} handleremovewatchlist={handleremovewatchlist} watchlist={watchlist}/>
